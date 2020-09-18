@@ -483,6 +483,8 @@ document.body.addEventListener('click', event => {
             button.href = parent.dataset.link;
             button.style.pointerEvents = '';
             closeButton.style.display = 'block';
+        } else {
+            resetSelect();
         }
     }
 
