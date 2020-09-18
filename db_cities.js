@@ -405,15 +405,18 @@ const renderListDefault = () => {
         label.style.color = '#00416A';
     },
     resetSelect = () => {
-        listDefault.style.display = '';
-        listAutocomplete.style.display = '';
-        listSelect.style.display = '';
+        closeSelect();
         label.style.top = '';
         label.style.left = '';
         label.style.color = '';
         closeButton.style.display = '';
         button.style.pointerEvents = 'none';
         selectCities.value = '';
+    },
+    closeSelect = () => {
+        listDefault.style.display = 'none';
+        listAutocomplete.style.display = '';
+        listSelect.style.display = '';
     };
 
 // Обработчики событий
@@ -450,9 +453,11 @@ selectCities.addEventListener('input', () => {
         listSelect.style.display = '';
         showCity(selectCities.value);
         listAutocomplete.style.display = 'flex';
+        closeButton.style.display = 'block';
         changeLabel();
     } else {
         resetSelect();
+        listDefault.style.display = '';
     }
 
 });
@@ -479,6 +484,10 @@ document.body.addEventListener('click', event => {
             button.style.pointerEvents = '';
             closeButton.style.display = 'block';
         }
+    }
+
+    if (!target.closest('.dropdown-lists__total-line') && target !== selectCities) {
+        closeSelect();
     }
 });
 
