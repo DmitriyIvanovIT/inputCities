@@ -6,12 +6,11 @@ const loaderPopup = document.querySelector('.loader__popup');
 const getData = url => fetch(url);
 
 let localLang,
-dataSave = JSON.parse(localStorage.getItem('savesCitiesDB'));
+dataSave;
 
 const createLocalLang = () => {
     let item = prompt('Введите локализацию("RU", "EN", "DE")');
     localStorage.removeItem('savesCitiesDB');
-    dataSave = JSON.parse(localStorage.getItem('savesCitiesDB'));
 
     if (item !== null) {
         item = item.toUpperCase().trim();
@@ -43,6 +42,8 @@ const createLocalLang = () => {
 }, saveLang = arr => {
     let strCookie = arr.filter(item => item.startsWith('lang=')).join('');
         localLang = strCookie.split('=')[1];
+
+    dataSave = JSON.parse(localStorage.getItem('savesCitiesDB'));
         
         if (!dataSave) {
             getData('./db_cities.json')
@@ -65,7 +66,6 @@ const createLocalLang = () => {
             loaderPopup.style.display = 'none';
             sortArr(dataSave);
             startProgram(dataSave);
-            
         }
 }, 
 checkLang = () => {
