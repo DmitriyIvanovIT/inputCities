@@ -19,7 +19,7 @@ const startProgram = data => {
     const renderListDefault = () => {
             const block = clearBlock(listDefault);
 
-            data['RU'].forEach(item => {
+            data.forEach(item => {
                 const countryBlock = createCounrtyBlock();
                 item.cities.sort((a, b) => {
                     return b.count - a.count;
@@ -51,7 +51,7 @@ const startProgram = data => {
         renderListSelect = country => {
             const block = clearBlock(listSelect);
 
-            data['RU'].forEach(item => {
+            data.forEach(item => {
                 if (item.country === country) {
                     const countryBlock = createCounrtyBlock();
 
@@ -82,7 +82,7 @@ const startProgram = data => {
             const block = clearBlock(listAutocomplete);
             const countryBlock = createCounrtyBlock();
             block.append(countryBlock);
-            data['RU'].forEach(item => {
+            data.forEach(item => {
                 item.cities.forEach(city => {
                     const fixItem = city.name.toLowerCase();
 
@@ -90,14 +90,13 @@ const startProgram = data => {
                     if (fixItem.startsWith(value.toLowerCase())) {
 
                         countryBlock.insertAdjacentHTML('beforeend', `
-                    <div class="dropdown-lists__line" data-link="${city.link}">
-                        <div class="dropdown-lists__city" >
-                            <strong>${city.name.slice(0, value.length)}</strong>${city.name.slice(value.length)}
-                        </div>
-                        <div class="dropdown-lists__count">${item.country}</div>
-                    </div>
-                `);
-
+                            <div class="dropdown-lists__line" data-link="${city.link}">
+                                <div class="dropdown-lists__city" >
+                                    <strong>${city.name.slice(0, value.length)}</strong>${city.name.slice(value.length)}
+                                </div>
+                                <div class="dropdown-lists__count">${item.country}</div>
+                            </div>
+                        `);
                     }
                 });
             });
